@@ -2,22 +2,14 @@ import { rehydrate, statemachine, derived } from "overmind"
 import { createStateHook, createActionsHook } from "overmind-react"
 
 export const config = {
-  state: statemachine(
-    {
-      unauthenticated: ["AUTHENTICATING"],
-      authenticating: ["UNAUTHENTICATED", "AUTHENTICATED"],
-      authenticated: ["UNAUTHENTICATING"],
-      unauthenticating: ["UNAUTHENTICATED", "AUTHENTICATED"],
-    },
-    {
-      state: "UNAUTHENTICATED",
-      items: [],
-      completedItems: derived((state) => {
-        return state.items.filter((item) => item.completed)
-      }),
-      page: null,
-    }
-  ),
+  state: {
+    state: "UNAUTHENTICATED",
+    items: [],
+    completedItems: derived((state) => {
+      return state.items.filter((item) => item.completed)
+    }),
+    page: null,
+  },
   actions: {
     changePage({ state }, mutations) {
       console.log(mutations)

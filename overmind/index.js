@@ -10,15 +10,17 @@ export const config = {
       unauthenticating: ["UNAUTHENTICATED", "AUTHENTICATED"],
     },
     {
-      completedItems: derived(({ items }) => {
-        return items.filter((item) => item.completed)
-      }),
+      state: "UNAUTHENTICATED",
       items: [],
+      completedItems: derived((state) => {
+        return state.items.filter((item) => item.completed)
+      }),
       page: null,
     }
   ),
   actions: {
     changePage({ state }, mutations) {
+      console.log(mutations)
       rehydrate(state, mutations || [])
 
       switch (state.page) {

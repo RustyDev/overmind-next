@@ -2,11 +2,13 @@ import React from "react"
 import { useState } from "../overmind"
 
 function Items() {
-  const { items } = useState()
+  const state = useState()
+
+  console.log(state)
 
   return (
     <ul>
-      {items.map((item) => (
+      {state.items.map((item) => (
         <li key={item.id}>{item.title}</li>
       ))}
     </ul>
